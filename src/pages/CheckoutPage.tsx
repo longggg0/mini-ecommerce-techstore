@@ -16,7 +16,7 @@ const CHAT_ID = "1384205752";
 
 
 export const CheckoutPage: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const { cart, clearCart } = useCart();
   const subtotal = cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
   const navigate = useNavigate();
