@@ -1,3 +1,5 @@
+import API_URL from "@/config/api.config";
+
 // services/customer.ts
 export interface RegisterPayload {
   firstName: string;
@@ -9,7 +11,7 @@ export interface RegisterPayload {
 
 export const registerCustomer = async (payload: RegisterPayload) => {
   console.log("Payload sent to backend:", payload); // <- debug here
-  const res = await fetch('http://localhost:3000/api/v1/customers-auth/register', {
+  const res = await fetch(`${API_URL}/api/v1/customers-auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -29,7 +31,7 @@ export interface LoginPayload {
 }
 
 export const loginCustomer = async (payload: LoginPayload) => {
-  const res = await fetch("http://localhost:3000/api/v1/customers-auth/login", {
+  const res = await fetch(`${API_URL}/api/v1/customers-auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +57,7 @@ export interface Customer {
 }
 
 export const getCustomers = async (): Promise<Customer[]> => {
-  const res = await fetch("http://localhost:3000/api/v1/customers");
+  const res = await fetch(`${API_URL}/api/v1/customers`);
 
   if (!res.ok) throw new Error("Failed to fetch customers");
 
@@ -65,7 +67,7 @@ export const getCustomers = async (): Promise<Customer[]> => {
 
 export const deleteCustomer = async (id: number) => {
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:3000/api/v1/customers/${id}`, {
+  const res = await fetch(`${API_URL}/api/v1/customers/${id}`, {
     method: "DELETE",
     headers: {
     "Content-Type": "application/json",

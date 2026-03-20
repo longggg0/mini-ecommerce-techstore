@@ -20,7 +20,7 @@ export const AdminProductsPage: React.FC = () => {
 
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-  // 🔍 SEARCH STATE
+  //SEARCH STATE
   const [search, setSearch] = useState("");
 const [debouncedSearch, setDebouncedSearch] = useState(search);
 
@@ -39,7 +39,7 @@ useEffect(() => {
   placeholderData:keepPreviousData, // prevents table from flickering while loading
 });
 
-  // ❌ DELETE
+  // DELETE
   const handleDelete = async (productId: number) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
 
@@ -70,7 +70,7 @@ useEffect(() => {
           <AddProductDialog />
         </div>
 
-        {/* 🔍 SEARCH */}
+        {/*  SEARCH */}
         <div className="relative max-w-md">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input

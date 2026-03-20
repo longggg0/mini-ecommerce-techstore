@@ -1,3 +1,5 @@
+import API_URL from "@/config/api.config";
+
 export interface ProductImage {
   id: number;
   imageUrl: string;
@@ -22,7 +24,7 @@ export interface Product {
 
 // GET all products
 export const getProducts = async (search = ""): Promise<Product[]> => {
-  const url = new URL("http://localhost:3000/api/v1/products");
+  const url = new URL(`${API_URL}/api/v1/products`);
   if (search) url.searchParams.append("search", search);
 
   const res = await fetch(url.toString());
@@ -34,7 +36,7 @@ export const getProducts = async (search = ""): Promise<Product[]> => {
 
 // GET single product by ID
 export const getProductById = async (productId: string | number): Promise<Product> => {
-  const res = await fetch(`http://localhost:3000/api/v1/products/${productId}`);
+  const res = await fetch(`${API_URL}/api/v1/products/${productId}`);
   if (!res.ok) throw new Error("Failed to fetch product");
 
   const data = await res.json();
@@ -51,7 +53,7 @@ export const createProduct = async (payload: {
   isActive?: boolean;
 }) => {
    const token = localStorage.getItem("token");
-  const res = await fetch("http://localhost:3000/api/v1/products", {
+  const res = await fetch(`${API_URL}/api/v1/products`, {
 
     method: "POST",
     headers: { "Content-Type": "application/json",
@@ -71,7 +73,7 @@ export const uploadProductImage = async (productId: number, file: File) => {
   const formData = new FormData();
   formData.append("file", file);
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:3000/api/v1/products/${productId}/upload`, {
+  const res = await fetch(`${API_URL}/api/v1/products/${productId}/upload`, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -105,7 +107,7 @@ export const updateProduct = async (
 
   if (file) formData.append("file", file);
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:3000/api/v1/products/${productId}`, {
+  const res = await fetch(`${API_URL}/api/v1/products/${productId}`, {
     method: "PUT",
     headers: { 
       "Authorization": `Bearer ${token}`,
@@ -122,7 +124,7 @@ export const updateProduct = async (
 // DELETE product
 export const deleteProduct = async (productId: number) => {
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:3000/api/v1/products/${productId}`, {
+  const res = await fetch(`${API_URL}/api/v1/products/${productId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,

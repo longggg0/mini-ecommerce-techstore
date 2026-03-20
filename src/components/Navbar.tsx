@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 export const Navbar: React.FC = () => {
   const { getTotalItems } = useCart();
 
-  // ✅ Store full user (including role)
+  // Store full user (including role)
   const [user, setUser] = useState<{
     name?: string;
     email?: string;
@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // ✅ Load user from localStorage
+  // Load user from localStorage
   const loadUser = () => {
     const storedUser = localStorage.getItem("user");
 
@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     loadUser();
 
-    // ✅ Listen for login/logout changes
+    // Listen for login/logout changes
     window.addEventListener("storage", loadUser);
 
     return () => {
@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
     };
   }, []);
 
-  // ✅ Logout
+  // Logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
@@ -83,7 +83,7 @@ export const Navbar: React.FC = () => {
               )}
             </Link>
 
-            {/* ✅ User Section */}
+            {/* User Section */}
             {user ? (
               <div className="flex items-center space-x-3 text-sm">
                 <User className="h-4 w-4 text-foreground/60" />
@@ -91,7 +91,7 @@ export const Navbar: React.FC = () => {
                   {user.name || user.email}
                 </span>
 
-                {/* ✅ Admin Dashboard Button */}
+                {/* Admin Dashboard Button */}
                 {user.role === "admin" && (
                   <Link to="/admin-dashboard">
                     <Button variant="secondary" size="sm">

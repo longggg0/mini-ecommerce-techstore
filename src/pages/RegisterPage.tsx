@@ -15,7 +15,7 @@ export const RegisterPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // ✅ Properly type useMutation
+  //  Properly type useMutation
   const mutation = useMutation<any, Error, RegisterPayload>({
     mutationFn: registerCustomer,
     onSuccess: () => {

@@ -10,7 +10,7 @@ export const OrderHistoryPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // ✅ Get customer ID from localStorage
+  // Get customer ID from localStorage
   const storedUser = localStorage.getItem("user");
   const customerId = storedUser ? JSON.parse(storedUser).id : null;
 
@@ -22,7 +22,7 @@ export const OrderHistoryPage: React.FC = () => {
         setLoading(true);
         let data = await fetchCustomerOrders(customerId);
 
-        // ✅ Sort orders by date descending (latest first)
+        // Sort orders by date descending (latest first)
         data.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
 
         setOrders(data);

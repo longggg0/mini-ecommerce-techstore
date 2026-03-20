@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
       
       alert(`Logged in as ${user.name || user.email}`);
 
-      // ✅ Role-based redirect
+      // Role-based redirect
       if (user.role === "admin") {
         navigate("/admin-dashboard");
       } else {

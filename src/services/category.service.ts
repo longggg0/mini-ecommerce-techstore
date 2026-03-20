@@ -1,5 +1,7 @@
 // services/category.service.ts
 
+import API_URL from "@/config/api.config";
+
 export interface Category {
   id?: number;
   name: string;
@@ -11,7 +13,7 @@ export interface Category {
 
 //render category
 export const getCategories = async (): Promise<Category[]> => {
-  const res = await fetch("http://localhost:3000/api/v1/categories");
+  const res = await fetch(`${API_URL}/api/v1/categories`);
   if (!res.ok) throw new Error("Failed to fetch categories");
   const data = await res.json();
   return data.data;
@@ -20,7 +22,7 @@ export const getCategories = async (): Promise<Category[]> => {
 //Add category
 export const addCategory = async (name: string): Promise<Category> => {
   const token = localStorage.getItem("token");
-  const res = await fetch("http://localhost:3000/api/v1/categories", {
+  const res = await fetch(`${API_URL}/api/v1/categories`, {
     method: "POST",
     headers: {
     "Content-Type": "application/json",
@@ -38,7 +40,7 @@ export const updateCategory = async (id: number, name: string): Promise<Category
   const token = localStorage.getItem("token");
   console.log("Sending update for ID:", id, "with Name:", name); // Debug log
   
-  const res = await fetch(`http://localhost:3000/api/v1/categories/${id}`, {
+  const res = await fetch(`${API_URL}/api/v1/categories/${id}`, {
     method: "PUT", 
     headers: { "Content-Type": "application/json" ,
               "Authorization": `Bearer ${token}`,
@@ -59,7 +61,7 @@ export const updateCategory = async (id: number, name: string): Promise<Category
 //delete
 export const deleteCategory = async (id: number): Promise<void> => {
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:3000/api/v1/categories/${id}`, {
+  const res = await fetch(`${API_URL}/api/v1/categories/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

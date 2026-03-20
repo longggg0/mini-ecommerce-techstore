@@ -71,7 +71,7 @@ export const AddCategoryDialog: React.FC = () => {
           <Button
             type="button"
             onClick={handleSubmit}
-            disabled={mutation.isPending} // ✅ TypeScript now recognizes this
+            disabled={mutation.isPending} 
           >
             {mutation.isPending ? "Saving..." : "Save Category"}
           </Button>

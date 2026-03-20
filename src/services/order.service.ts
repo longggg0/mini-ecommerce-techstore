@@ -8,6 +8,8 @@
 //   role: string;
 // }
 
+import API_URL from "@/config/api.config";
+
 // // --- Order detail type from DB ---
 // export interface OrderDetailDB {
 //   id: number;
@@ -78,7 +80,7 @@ export const createOrder = async (payload: {
   location: string;
   items: { productId: number; qty: number }[];
 }) => {
-  const res = await fetch("http://localhost:3000/api/v1/orders", {
+  const res = await fetch(`${API_URL}/api/v1/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -95,24 +97,11 @@ export const createOrder = async (payload: {
   return data;
 };
 
-//  FETCH ORDERS
-// export const fetchOrders = async (): Promise<Order[]> => {
-//   const res = await fetch("http://localhost:3000/api/v1/orders");
 
-//   if (!res.ok) throw new Error("Failed to fetch orders");
-
-//   const data = await res.json();
-
-//   return data.data.map((order: Order) => ({
-//     ...order,
-//     status: "completed",
-//   }));
-// };
-// Fetch orders with optional search by customer name
 export const fetchOrders = async (name?: string): Promise<Order[]> => {
   const url = name
-    ? `http://localhost:3000/api/v1/orders/search/by-name?name=${encodeURIComponent(name)}`
-    : "http://localhost:3000/api/v1/orders";
+    ? `${API_URL}/api/v1/orders/search/by-name?name=${encodeURIComponent(name)}`
+    : `${API_URL}/api/v1/orders`;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to fetch orders");
@@ -125,7 +114,7 @@ export const fetchOrders = async (name?: string): Promise<Order[]> => {
 };
 //  FETCH ORDERS FOR A SINGLE CUSTOMER
 export const fetchCustomerOrders = async (customerId: number): Promise<Order[]> => {
-  const res = await fetch(`http://localhost:3000/api/v1/orders?customerId=${customerId}`);
+  const res = await fetch(`${API_URL}/api/v1/orders?customerId=${customerId}`);
 
   if (!res.ok) throw new Error("Failed to fetch customer orders");
 
@@ -139,7 +128,7 @@ export const fetchCustomerOrders = async (customerId: number): Promise<Order[]> 
 //download doc
 export const downloadOrderDoc = async (orderId: number) => {
   const response = await fetch(
-    `http://localhost:3000/api/v1/orders/${orderId}/generate-doc`,
+    `${API_URL}/api/v1/orders/${orderId}/generate-doc`,
     {
       method: "GET",
     }

@@ -53,7 +53,7 @@ export const AddProductDialog: React.FC = () => {
         return alert("Please fill all required fields");
       }
 
-      // 1️⃣ Create product
+      // Create product
       const newProduct = await createProduct({
         name: formData.name,
         categoryId: formData.categoryId,
@@ -63,15 +63,15 @@ export const AddProductDialog: React.FC = () => {
         isActive: true,
       });
 
-      // 2️⃣ Upload image if exists
+      //  Upload image if exists
       if (formData.image) {
         await uploadProductImage(newProduct.id, formData.image);
       }
 
-      // 3️⃣ Refetch and update cache
+      //  Refetch and update cache
       queryClient.invalidateQueries({ queryKey: ["products"] });
 
-      // 4️⃣ Reset form
+      //  Reset form
       setFormData({
         name: "",
         categoryId: "",

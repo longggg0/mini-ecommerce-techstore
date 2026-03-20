@@ -9,6 +9,7 @@ import { User, Mail, Phone, ArrowLeft, CheckCircle, XCircle } from "lucide-react
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import API_URL from "@/config/api.config";
 
 const TELEGRAM_BOT_TOKEN = "8624532493:AAF19kxc9Yvuax41QlZA2cg7ogbi7is3vxU";
 const CHAT_ID = "1384205752";
@@ -90,7 +91,7 @@ if (!formData.email.includes("@gmail.com")) {
     try {
       console.log(" sending to backend...");
 
-      const res = await fetch("http://localhost:3000/api/v1/orders", {
+      const res = await fetch(`${API_URL}/api/v1/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
