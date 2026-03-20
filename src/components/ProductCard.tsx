@@ -63,25 +63,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
                 {/* OUT OF STOCK BADGE */}
                 {isOutOfStock && (
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">
-                      Out of Stock
-                    </span>
+                    <span className="text-white font-bold text-sm">Out of Stock</span>
                   </div>
                 )}
               </div>
 
               {/* Product Info */}
-              <div className="p-3 space-y-2">
+              <div className="p-2 sm:p-3 space-y-1 sm:space-y-2">
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase bg-secondary text-secondary-foreground">
                   {product.category}
                 </span>
 
-                <h3 className="font-semibold text-sm text-foreground line-clamp-2 group-hover:text-secondary transition-colors">
+                <h3 className="font-semibold text-xs sm:text-sm text-foreground line-clamp-2 group-hover:text-secondary transition-colors">
                   {product.name}
                 </h3>
 
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-lg font-semibold text-primary">
+                  <span className="text-base sm:text-lg font-semibold text-primary">
                     {product.price}$
                   </span>
                   <span className="text-xs text-muted-foreground">
@@ -92,10 +90,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             </div>
 
             {/* Add To Cart */}
-            <div className="p-3 pt-0">
+            <div className="p-2 sm:p-3 pt-0">
               <button
                 disabled={isOutOfStock}
-                className={`flex items-center justify-center ml-4 w-60 h-11 rounded-full text-sm transition
+                className={`flex items-center justify-center w-full h-9 sm:h-11 rounded-full text-xs sm:text-sm transition
                 ${
                   isOutOfStock
                     ? "bg-gray-400 cursor-not-allowed"
@@ -108,7 +106,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
                   }
                 }}
               >
-                <ShoppingCart className="h-4 w-4 mr-1" />
+                <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                 {isOutOfStock ? "Out of Stock" : "Add"}
               </button>
             </div>

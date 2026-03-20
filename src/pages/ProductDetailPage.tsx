@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
 import { getProductById, type Product } from "@/services/product.service";
+import { getImageUrl } from "@/config/api.config";
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,7 +27,6 @@ export const ProductDetailPage: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchProduct();
   }, [id]);
 
@@ -36,24 +36,21 @@ export const ProductDetailPage: React.FC = () => {
   return (
     <>
       <div className="min-h-screen">
-        <div className="max-w-350 mx-auto px-8 lg:px-12 py-16 md:py-24">
+        <div className="max-w-350 mx-auto px-4 sm:px-8 lg:px-12 py-10 md:py-24">
           <Link to="/">
-            <Button
-              variant="ghost"
-              className="mb-12 hover:bg-accent transition-all duration-300 rounded-full"
-            >
+            <Button variant="ghost" className="mb-8 hover:bg-accent transition-all duration-300 rounded-full">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Products
             </Button>
           </Link>
 
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-            {/* Product Images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-24">
+            {/* Product Image */}
             <div className="bg-white rounded-3xl shadow-2xl shadow-black/5 overflow-hidden">
-              <div className="aspect-square p-8 md:p-12">
+              <div className="aspect-square p-6 sm:p-8 md:p-12">
                 {product.images.length > 0 ? (
                   <img
-                    src={product.images[0].imageUrl}
+                    src={getImageUrl(product.images[0].imageUrl)}
                     alt={product.name}
                     className="w-full h-full object-cover rounded-2xl"
                   />
@@ -66,39 +63,32 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Product Info */}
-            <div className="space-y-10 py-4">
-              <div className="space-y-6">
-                <Badge
-                  variant="secondary"
-                  className="text-xs font-medium tracking-wide uppercase px-4 py-1.5"
-                >
+            <div className="space-y-6 sm:space-y-10 py-2 sm:py-4">
+              <div className="space-y-4 sm:space-y-6">
+                <Badge variant="secondary" className="text-xs font-medium tracking-wide uppercase px-4 py-1.5">
                   {product.category?.name}
                 </Badge>
 
-                <h1 className="text-5xl md:text-6xl font-bold tracking-tighter leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight">
                   {product.name}
                 </h1>
 
-                <p className="text-4xl md:text-5xl font-bold text-primary tracking-tight">
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary tracking-tight">
                   ${product.price}
                 </p>
               </div>
 
-              <div className="py-8 border-y border-border">
-                <h3 className="font-semibold text-lg mb-4 tracking-tight">
-                  Description
-                </h3>
+              <div className="py-6 sm:py-8 border-y border-border">
+                <h3 className="font-semibold text-lg mb-4 tracking-tight">Description</h3>
                 <p className="text-muted-foreground leading-relaxed text-base">
                   {product.description}
                 </p>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 <div className="flex items-center space-x-4">
                   <span className="font-medium text-base">Availability:</span>
-                  <Badge className="px-4 py-1.5">
-                    {`${product.qty} Left`}
-                  </Badge>
+                  <Badge className="px-4 py-1.5">{`${product.qty} Left`}</Badge>
                 </div>
 
                 <div className="flex items-center space-x-6 mt-6">
