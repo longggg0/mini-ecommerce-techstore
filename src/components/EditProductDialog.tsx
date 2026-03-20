@@ -24,7 +24,7 @@ import { Textarea } from "./ui/textarea";
 
 export const EditProductDialog = ({ product, open, setOpen }: any) => {
   const queryClient = useQueryClient();
-
+  const [update, setUpdate] = useState(false);
   const [formData, setFormData] = useState({
     name: product.name || "",
     categoryId: String(product.category?.id || ""),
@@ -41,6 +41,7 @@ export const EditProductDialog = ({ product, open, setOpen }: any) => {
 
   const handleSubmit = async () => {
     try {
+      setUpdate(true);
       await updateProduct(
         product.id,
         {
@@ -52,12 +53,14 @@ export const EditProductDialog = ({ product, open, setOpen }: any) => {
         },
         formData.image || undefined
       );
-
+      
       queryClient.invalidateQueries({ queryKey: ["products"] });
       setOpen(false);
     } catch (err) {
       console.error(err);
       alert("Update failed");
+    }finally {
+      setUpdate(false);  // ← add
     }
   };
 
@@ -154,7 +157,7 @@ export const EditProductDialog = ({ product, open, setOpen }: any) => {
 
         <DialogFooter>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSubmit}>Update</Button>
+          <Button onClick={handleSubmit}>{update ? "Updating..." : "Update"}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -208,7 +208,7 @@ export const AddProductDialog: React.FC = () => {
               onChange={handleChange}
               rows={4}
             />
-          </div>
+          </div>  
 
         </div>
 
