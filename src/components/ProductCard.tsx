@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { getImageUrl } from "@/config/api.config";
 
 interface Product {
   id: number;
@@ -54,7 +55,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
               {/* Product Image */}
               <div className="aspect-square overflow-hidden bg-accent/40 flex items-center justify-center relative">
                 <img
-                  src={product.image}
+                  src={getImageUrl(product.image || "")}
                   alt={product.name}
                   className="max-h-full max-w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                 />
