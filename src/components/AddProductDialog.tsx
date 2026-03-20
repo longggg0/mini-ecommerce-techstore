@@ -21,12 +21,12 @@ import {
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCategories, type Category } from "@/services/category.service";
-import { createProduct,  uploadProductImage } from "@/services/product.service";
+import { createProduct, uploadProductImage } from "@/services/product.service";
 
 export const AddProductDialog: React.FC = () => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-
+  const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     categoryId: "",
@@ -52,7 +52,7 @@ export const AddProductDialog: React.FC = () => {
       if (!formData.name || !formData.categoryId || !formData.price || !formData.stock) {
         return alert("Please fill all required fields");
       }
-
+      setSaving(true);
       // Create product
       const newProduct = await createProduct({
         name: formData.name,
@@ -84,6 +84,8 @@ export const AddProductDialog: React.FC = () => {
     } catch (error) {
       console.error("Add product error:", error);
       alert("Failed to add product");
+    } finally {
+      setSaving(false);  // ← add
     }
   };
 
@@ -195,7 +197,7 @@ export const AddProductDialog: React.FC = () => {
             )}
           </div>
 
-          
+
           {/* Description */}
           <div className="grid gap-2">
             <Label htmlFor="description">Description</Label>
@@ -214,8 +216,8 @@ export const AddProductDialog: React.FC = () => {
           <Button type="button" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button type="button" onClick={handleSubmit}>
-            Save Product
+          <Button type="button" onClick={handleSubmit} disabled={saving}>
+            {saving ? "Saving..." : "Save Product"}
           </Button>
         </DialogFooter>
       </DialogContent>
