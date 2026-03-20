@@ -21,7 +21,7 @@ import {
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCategories, type Category } from "@/services/category.service";
-import { createProduct, getProducts, uploadProductImage } from "@/services/product.service";
+import { createProduct,  uploadProductImage } from "@/services/product.service";
 
 export const AddProductDialog: React.FC = () => {
   const [open, setOpen] = useState(false);

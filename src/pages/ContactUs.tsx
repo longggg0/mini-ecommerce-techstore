@@ -72,7 +72,7 @@ Message: ${formData.message}
     <div className="min-h-screen flex flex-col bg-background">
       {/* Hero Section */}
       <div className="bg-white border-b border-border/50">
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-12 py-16 md:py-20">
+        <div className="max-w-350 mx-auto px-8 lg:px-12 py-16 md:py-20">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter leading-tight">
               Get in touch
@@ -87,7 +87,7 @@ Message: ${formData.message}
 
       {/* Main Content */}
       <div className="flex-1">
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-12 py-16 md:py-24">
+        <div className="max-w-350 mx-auto px-8 lg:px-12 py-16 md:py-24">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-8">

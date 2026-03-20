@@ -5,7 +5,7 @@ import { Smartphone, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-muted/30 border-t border-border/50 mt-auto">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12 py-16">
+      <div className="max-w-350 mx-auto px-8 lg:px-12 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-12 border-b border-border/50">
           {/* Brand Section */}
