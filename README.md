@@ -1,73 +1,104 @@
-# React + TypeScript + Vite
+# TechStore 🛍️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack mini e-commerce web application for browsing and purchasing tech products (iPhones & Laptops).
 
-Currently, two official plugins are available:
+**Live Demo:** [mini-ecommerce-techstore-5v3b.vercel.app](https://mini-ecommerce-techstore-5v3b.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔍 **Product Browsing & Search** — Browse products with category filtering and debounced search
+- 🛒 **Shopping Cart & Checkout** — Add to cart, adjust quantities, and place orders
+- 🔐 **User Authentication** — Customer register/login with JWT tokens
+- 🛡️ **Auth Middleware** — Protected admin routes using JWT verification on the backend
+- 👨‍💼 **Admin Dashboard** — Manage products, categories, customers, and orders
+- 📦 **Order Management** — View and manage all customer orders
+- 🧾 **Invoice Generation** — Admin can generate and download order invoices as `.docx`
+- 📲 **Telegram Notifications** — New orders are sent instantly to a Telegram bot
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend
+- React + TypeScript (Vite)
+- Tailwind CSS + shadcn/ui
+- TanStack Query
+- React Router DOM
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Backend
+- Node.js + Express
+- Sequelize ORM + PostgreSQL
+- JWT Authentication
+- bcryptjs + express-fileupload
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js v18+
+- PostgreSQL
+
+### Frontend Setup
+
+```bash
+git clone https://github.com/longggg0/mini-ecommerce-techstore.git
+cd mini-ecommerce-techstore
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a `.env` file:
+```env
+VITE_API_URL=http://localhost:3000
 ```
+
+```bash
+npm run dev
+```
+
+### Backend Setup
+
+```bash
+git clone https://github.com/longggg0/techstore_backend.git
+cd techstore_backend
+npm install
+```
+
+Update `config/config.json` with your PostgreSQL credentials, then run:
+
+```bash
+npx sequelize-cli db:migrate
+node index.js
+```
+
+---
+
+## Deployment
+
+| Service | Platform |
+|---------|----------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Render PostgreSQL |
+
+---
+
+## Environment Variables
+
+### Frontend (Vercel)
+| Key | Description |
+|-----|-------------|
+| `VITE_API_URL` | Backend API URL |
+
+### Backend (Render)
+| Key | Description |
+|-----|-------------|
+| `DATABASE_URL` | PostgreSQL connection string |
+
+---
+
+## Admin Access
+
+To create an admin account, insert a user with `role: "admin"` into the `Customers` table directly via database or seeder.
